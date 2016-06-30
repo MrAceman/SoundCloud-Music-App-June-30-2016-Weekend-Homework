@@ -1,0 +1,65 @@
+.container {
+  min-width:800px;
+  width:90vw;
+  border:5px solid grey;
+  margin:20px;
+padding:10px;
+}
+
+h2 {
+  text-align:center;
+}
+
+.now-playing{
+  padding-bottom:30px;
+  margin-bottom: 50px;
+  border-bottom: 2px solid black;
+}
+
+.art-search-text {
+  padding:10px;
+  min-width:720px;
+  width:80vw;
+  margin:auto;
+}
+
+.search-button{
+  margin-top:10px;
+  padding-top:12px;
+  padding-bottom:12px;
+}
+
+.track-results{
+  display:flex;
+  -webkit-flex-wrap: wrap;
+
+}
+
+ul{
+  padding:0;
+  list-style:none;
+  text-align:center;
+    max-width:200px;
+}
+
+ul li{
+padding:auto;
+margin:auto;
+}
+
+.each-track{
+  min-width:200px;
+  margin:50px;
+  word-wrap: break-word;
+}
+
+.cover-art{
+  min-width:200px;
+}
+
+.listing-title{
+  padding-bottom:20px;
+}
+
+.listing-band{
+}
