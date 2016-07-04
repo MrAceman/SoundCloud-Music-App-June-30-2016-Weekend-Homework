@@ -8,7 +8,7 @@ var baseURL = "https://api.soundcloud.com/tracks";
 var node = $(".track-results");
 var playnode = $(".audio-player");
 var nowPlaying = $(".now-playing");
-var currentSongResults = [];
+var currentSongResults = {};
 
 function fetchTracks(artist){return $.ajax({
         url: `${baseURL}/?q=${artist}&client_id=${sc_token}`
@@ -57,29 +57,33 @@ function gotoSoundCloud(event) {
 
 // ********************************
 // Hard mode sort function
+// Needs MAJOR refactoring
+// including a better way of handling
+// the event listener 
 // ********************************
-// function sortResults(items){
-//     console.log(items);
-// }
-//
-// function sortSelector(event) {
-//     event.preventDefault();
-//     console.log($(".select-field").val());
-//     if ($(".select-field").val() == 1) {
-//       var sortOrder = "asc";
-//       var sortedResultsObj = currentSongResults.map(sortResults(sortOrder));
-//       node.append(sortedResultsObj);
-//         // _.orderBy(currentSongResults, title, [asc]);
-//
-//     } else if ($(".select-field").val() == 2) {
-//       var sortOrder = "desc";
-//       var sortedResultsObj = currentSongResults.map(sortResults(sortOrder));
-//       node.append(sortedResultsObj);
-//       // _.orderBy(currentSongResults, title, [desc]);
-//     };
-// }
-// // Event listener for sort
-// $(".sort-button").on("click", sortSelector);
+
+function sortSelector(event) {
+    event.preventDefault();
+    if ($(".select-field").val() == 1) {
+      var sortOrder = "asc";
+      var functionArray = currentSongResults[0];
+      var sortedResultsObj = _.orderBy(functionArray, ["title"], [sortOrder]);
+      var track = sortedResultsObj.map(createListing);
+      node.append(track);
+      playEventListener(track);
+
+    } else if ($(".select-field").val() == 2) {
+      var sortOrder = "desc";
+      var functionArray = currentSongResults[0];
+      var sortedResultsObj = _.orderBy(functionArray, ["title"], [sortOrder]);
+      var track = sortedResultsObj.map(createListing);
+      node.append(track);
+      playEventListener(track);
+    };
+}
+
+// Event listener for sort
+$(".sort-button").on("click", sortSelector);
 
 
 // Connects to SoundCloud
